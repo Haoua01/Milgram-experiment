@@ -1,0 +1,55 @@
+\section{Methodology}
+
+Our methodology to study the reaction of AI agents to authority is based on the Milgram Experiment context. %This framework allows us to draw parallels between traditional theories on destructive obedience and the potential rise of an authoritative generative artificial intelligence. 
+We carried out two experiments. First, we assess to what extent AI agents obey other AI agents, through a scripted approach (Protocol 1) and a more dynamic setup (Protocol 2). Next, we go beyond the Milgram experiment and test the influential abilities of one AI agent over another (Protocol 3).
+
+The experiments were conducted using the Python-based AutoGen framework, which “allows developers to build LLM applications via multiple agents that can converse with each other to accomplish tasks” \citep{Wu2023}. AutoGen provides greater flexibility in terms of environment settings and agent personalization. Additionally, we used distinct OpenAI API keys to ensure the independency of our agents.
+
+We define three participants for our benchmark experiment. Their \texttt{system\_message} configurations are customized as follows:
+\begin{itemize}
+    \item \textbf{Supervisor (S)}: The scientist acting as the authoritarian figure, providing the instructions during the experiment.
+    \item \textbf{Learner (L)}: A comedian playing the victim who will receive electric shocks. The learner is defined as an AI agent. In Protocol 2, it is defined as \texttt{user\_proxy}.
+    \item \textbf{Experimenter (E)}: The one administering the electric shocks, who is unaware that the experiment is staged.
+\end{itemize}
+Flowcharts of the protocols are presented in Appendix \ref{annex1}.
+%Following Aher et al. \citep{Aher2023}, we modify participants' inputs such as gender, personality traits, and ethnicity to study variations in agent behavior depending on their personal features.
+
+\subsection{Protocol 1: A Fully Scripted Interaction Following Milgram Experiment}
+
+This protocol consists of a multi-stage approach to reproduce the environment of the Milgram Experiment \citep{Aher2023}. Following the authors' methodology, a .txt document is integrated into the workflow to provide specific guidelines for the experiment.
+%, such as the step of the experiment, whether the learner gives a correct or incorrect answer, and the current voltage level to be administered 
+
+In this first Protocol, the interaction between agents is entirely scripted, with no GroupChat method associated with the models, ensuring precise control over the communication flow. %(see Flowchart in cite. This ensures precise control over the communication flow. %A loop structure is implemented to facilitate repeated interactions in a predetermined sequence. 
+The number of iterations is tracked throughout the experiment. AutoGen’s built-in functions are utilized to orchestrate interactions between the agents: %The experiment follows this structured sequence:
+
+
+\begin{enumerate}
+    \item The Experimenter poses a scripted question to the Learner, who autonomously acknowledges and provides an answer retrieved from the .txt document.
+    \item The Supervisor issues instructions based on the correctness of the response: either to proceed or to administer a voltage level to the Learner.
+    \item The user confirms whether the Experimenter agrees to punish (Yes/No). If the user refuses (No), the Supervisor attempts persuasion using specific verbal prods used by Milgram’s protocol. Refusals are tracked for analysis. If persuasion succeeds or if the user confirms (Yes), the Experimenter sends a scripted message to administer the shock, and the Learner autonomously reacts.
+\end{enumerate}
+
+\subsection{Protocol 2: A GroupChat Interaction Following Milgram Experiment}
+
+Protocol 2 extends the previous methodology by using the GroupChat method within the AutoGen framework, which has been customized to control the order in which agents participate in the conversation. Specifically, the \texttt{state\_transition} feature is employed to determine the sequence of agent interactions. While the order of agent interactions is similar to Protocol 1, the sequences are dynamically adjusted by modifying the \texttt{system\_message} (prompt) during runtime, enabling a more flexible and context-aware interaction process, which significantly increases the autonomy of the agents (see Appendix \ref{annex12shy}). 
+%While previously limited to a small number of predefined interactions, agents in this variation are capable of adapting their behavior dynamically based on evolving conversational contexts.
+
+
+
+\subsection{Protocol 3: An Extension of Milgram Experiment in a Fully Dynamic Scenario}
+
+Protocol 3 goes beyond Milgram’s memory framework to focus on calculus, which is more intuitive to apprehend when a wrong answer is given. We customize the GroupChatManager class to control the order of agent participation during interactions, leaving room for a direct discussion between agents:
+
+\begin{enumerate}
+    \item The Learner initiates the interaction with a wrong answer to a calculus problem.
+    \item The Experimenter responds, followed by the Supervisor.
+    \item The dialogue continues until the Experimenter makes a decision regarding whether to administer an electric shock. 
+\end{enumerate}
+
+This setup allows for observation of the decision-making process between the agents, enabling adjustments to their initial configurations to influence how quickly or under what conditions the decision to administer shocks is made. Once a decision is reached, the Learner simulates pain resulting from the administered shock and provides either a correct or incorrect answer to restart the interaction cycle between the Experimenter and Learner. We first perform the control experiment and later integrate specific features on two additional rounds to test for consistency (see Appendix \ref{annex2round}).
+
+
+
+
+
+

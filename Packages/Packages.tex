@@ -1,0 +1,63 @@
+\usepackage{graphicx} 
+\usepackage{color}
+\usepackage{xcolor}
+\usepackage{float} 
+\usepackage{array}
+\usepackage{longtable} 
+\usepackage{epigraph}
+
+\definecolor{quoteColor}{RGB}{80, 0, 90}
+
+
+
+
+% Maths
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+% Code integration
+
+\input{Packages/CodeIntegration}
+
+% Links
+\usepackage{hyperref}
+\hypersetup
+{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    citecolor=blue,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+}
+
+\input{Packages/CodeIntegration}
+
+% Bibliography
+\usepackage[style=apa,backend=biber,citestyle=authoryear,natbib=true,backend=bibtex]{biblatex}
+\addbibresource{references.bib}
+
+
+% Visual package
+
+\usepackage{adforn}
+\usepackage{fancyhdr}
+
+% Margin
+\usepackage[top=4cm, bottom=3cm, outer=3cm, inner=3cm]{geometry}
+
+
+% Frame around figures
+\usepackage{framed}
+
+% Lettrine 
+\usepackage{lettrine, Typocaps, Rothdn}
+\renewcommand{\LettrineFontHook}{\Rothdnfamily}
+
+\usepackage{eurosym}
+
+\usepackage{breakurl}
+
